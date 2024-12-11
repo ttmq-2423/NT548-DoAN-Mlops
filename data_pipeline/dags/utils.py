@@ -23,6 +23,7 @@ class DefaultConfig:
 
     DEFAULT_DOCKER_OPERATOR_ARGS = {
         "image": f"{AppConst.DOCKER_USER}/mlops_crash_course/data_pipeline:latest",
+        "docker_url": "tcp://docker-proxy:2375", 
         "api_version": "auto",
         "auto_remove": True,
         "mounts": [

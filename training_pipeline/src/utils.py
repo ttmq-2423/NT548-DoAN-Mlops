@@ -7,8 +7,14 @@ from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv(../.env)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
+# Đường dẫn đến file .env (1 cấp lên so với src)
+env_path = os.path.join(current_dir, '../.env')
+
+# Load .env
+load_dotenv(env_path)
 
 class AppConst:
     LOG_LEVEL = logging.DEBUG
@@ -45,7 +51,7 @@ class AppPath:
 class Config:
     def __init__(self) -> None:
         import numpy as np
-
+        load_dotenv()
         self.random_seed = int(os.environ.get("RANDOM_SEED"))
         self.feature_dict = {
             # "event_timestamp": pd.DatetimeTZDtype(tz="UTC"),

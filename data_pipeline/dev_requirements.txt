@@ -4,3 +4,4 @@ feast[redis]==0.24.0
 pandas==1.4.4
 pendulum==2.1.2
 pyspark==3.0.1
+numpy==1.26.4
