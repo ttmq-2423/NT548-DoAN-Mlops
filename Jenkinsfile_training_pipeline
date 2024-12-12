@@ -2,7 +2,7 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.9' # 
+            image 'python:3.9' 
 
         }
     }
@@ -13,7 +13,7 @@ pipeline {
 
             steps {
                 echo 'Building training pipeline..'
-                sh 'cd training_pipeline && make build_image'  # 
+                sh 'cd training_pipeline && make build_image'  
 
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             when {changeset "training_pipeline/**" }
 
             steps {
-                echo 'Testing training pipeline..'  # 
+                echo 'Testing training pipeline..'  
 
             }
         }
@@ -31,7 +31,7 @@ pipeline {
             when {changeset "training_pipeline/**" }
 
             steps {
-                sh 'cd training_pipeline && make deploy_dags' # 
+                sh 'cd training_pipeline && make deploy_dags' 
 
             }
         }
