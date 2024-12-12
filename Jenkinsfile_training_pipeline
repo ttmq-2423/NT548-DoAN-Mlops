@@ -1,5 +1,11 @@
+
 pipeline {
-    agent { docker { image 'python:3.9' } }
+    agent {
+        docker {
+            image 'python:3.9' # 
+
+        }
+    }
 
     stages {
         stage('build training pipeline') {
@@ -7,7 +13,8 @@ pipeline {
 
             steps {
                 echo 'Building training pipeline..'
-                sh 'cd training_pipeline && make build_image'
+                sh 'cd training_pipeline && make build_image'  # 
+
             }
         }
 
@@ -15,27 +22,17 @@ pipeline {
             when {changeset "training_pipeline/**" }
 
             steps {
-                echo 'Testing training pipeline..'
+                echo 'Testing training pipeline..'  # 
+
             }
         }
 
         stage('deploy training pipeline') {
-            parallel {
-                stage('batch serving pipeline') {
-                    when {changeset "training_pipeline/**" }
+            when {changeset "training_pipeline/**" }
 
-                    steps {
-                        sh 'cd training_pipeline && make deploy_dags'
-                    }
-                }
+            steps {
+                sh 'cd training_pipeline && make deploy_dags' # 
 
-                stage('online serving API') {
-                    when {changeset "training_pipeline/**" }
-
-                    steps {
-                        sh 'cd training_pipeline && make compose_up'
-                    }
-                }
             }
         }
     }
